@@ -639,9 +639,11 @@ local function spb_thinker(mobj)
 			return true
 		end
 	end
-	P_XYMovement(mobj)
 	if mobj.valid then
-		P_ZMovement(mobj)
+		P_XYMovement(mobj)
+		if mobj.valid then
+			P_ZMovement(mobj)
+		end
 	end
 	return true
 end

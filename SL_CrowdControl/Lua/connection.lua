@@ -389,13 +389,14 @@ local IF_EGGMANOUT = 1<<2
 local function itemcheck() 
 	return (default_ready() 
 			and consoleplayer.itemflags & (IF_ITEMOUT|IF_EGGMANOUT) == 0 
-			and consoleplayer.curshield == KSHIELD_NONE) --and not consoleplayer.itemroulette.eggman
+			and consoleplayer.curshield == KSHIELD_NONE
+			and leveltime > starttime) --and not consoleplayer.itemroulette.eggman
 end
 
 effects["nothing"] = CCEffect.New("nothing", function(t)
 	K_StripItems(consoleplayer)
 end, function() 
-	return itemcheck()
+	return itemcheck() and consoleplayer.itemtype != KITEM_NONE
 end)
 
 effects["sneakers"] = CCEffect.New("sneakers", function(t)
@@ -403,14 +404,14 @@ effects["sneakers"] = CCEffect.New("sneakers", function(t)
 	consoleplayer.itemtype = KITEM_SNEAKER
 	consoleplayer.itemamount = 1
 	consoleplayer.itemflags = $ & ~(IF_ITEMOUT|IF_EGGMANOUT)
-end, default_ready)
+end, function()
+	return itemcheck()
+end)
 
 effects["triggersneaker"] = CCEffect.New("triggersneaker", function(t)
 	K_DoSneaker(consoleplayer, 1)
 	K_PlayBoostTaunt(consoleplayer.mo)
-end, function()
-	return itemcheck()
-end)
+end, default_ready)
 
 effects["dualsneakers"] = CCEffect.New("dualsneakers", function(t)
 	K_StripItems(consoleplayer)
@@ -796,7 +797,7 @@ end, default_ready, 15 * TICRATE)
 effects["ringlock"] = CCEffect.New("ringlock", function(t)
 	// dummy function as the hook runs too early
 end, function()
-	return default_ready() and consoleplayer.pflags & PF_RINGLOCK != PF_RINGLOCK
+	return default_ready() and spb_timer == 0 and not K_IsSPBInGame()
 end, 15 * TICRATE)
 
 effects["spbattack"] = CCEffect.New("spbattack", function(t)
