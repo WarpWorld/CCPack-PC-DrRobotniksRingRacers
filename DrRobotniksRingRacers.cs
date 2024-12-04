@@ -109,7 +109,7 @@ class DrRobotniksRingRacers : FileEffectPack
                 new Effect("S. P. B. Attack", "spbattack")
                 {
                     Price = 100, Description = "Make a Self Propelled Bomb follow the player for a bit.",
-                    SessionCooldown = SITimeSpan.FromSeconds(120)
+                    SessionCooldown = 2
                 },
                 new Effect("Invert Controls", "invertcontrols")
                 {
