@@ -151,13 +151,19 @@ local function handle_message(msg)
 		-- stop
 		elseif msg_type == 2 then
 			local code = msg["code"]
-			local effect = effects[code]
-			if effect == nil or not (getmetatable(effect) == CCEffect.Meta) then
-				log_msg("Couldn't find effect '"..code.."'!")
-				create_response(id, UNAVAILABLE)
+			if not code == nil then
+				local effect = effects[code]
+				if effect == nil or not (getmetatable(effect) == CCEffect.Meta) then
+					log_msg("Couldn't find effect '"..code.."'!")
+					create_response(id, UNAVAILABLE)
+					return
+				end
+				running_effects[code] = nil
+				create_response(id, SUCCESS)
+			else
+				running_effects = {}
+				create_response(id, SUCCESS)
 			end
-			running_effects[code] = nil
-			create_response(id, SUCCESS)
 		-- keepalive
 		elseif msg_type == 255 then
 			log_msg_silent("PONG")
