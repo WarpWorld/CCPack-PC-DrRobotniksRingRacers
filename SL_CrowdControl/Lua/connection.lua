@@ -461,7 +461,7 @@ effects["triggerbanana"] = CCEffect.New("triggerbanana", function(t)
 	local banana = P_SpawnMobjFromMobj(consoleplayer.mo, 0, 0, 0, MT_BANANA)
 	banana.destscale = mapobjectscale
 	banana.scale = mapobjectscale
-	banana.health = 0
+	banana.health = 1
 end, default_ready)
 
 effects["triplebanana"] = CCEffect.New("triplebanana", function(t)
