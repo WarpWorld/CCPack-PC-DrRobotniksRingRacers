@@ -844,6 +844,13 @@ effects["remotecontrol"] = CCEffect.New("remotecontrol", function(t)
 	// dummy function as the hook runs too late
 end, default_ready, 15 * TICRATE)
 
+effects["eggmark"] = CCEffect.New("eggmark", function(t)
+	K_AddHitLag(consoleplayer.mo, 5, false)
+	K_DropItems(consoleplayer)
+	consoleplayer.eggmanexplode = 6*TICRATE
+	S_StartSound(consoleplayer.mo, sfx_itrole)
+end, default_ready)
+
 effects["changerandom"] = CCEffect.New("changerandom", function(t)
 	local skin = skins[P_RandomKey(#skins)]
 	while not (skin.valid) or (oldskin == skin) or not R_SkinUsable(consoleplayer, skin.name) do
