@@ -299,6 +299,23 @@ end
 
 addHook("PlayerThink", on_player_think)
 
+local function on_player_cmd(player, cmd)
+	if running_effects["invertcontrols"] != nil and running_effects["invertcontrols"]["was_ready"] then
+		cmd.aiming = -cmd.aiming
+		cmd.turning = -cmd.turning
+	end
+	if running_effects["remotecontrol"] != nil and running_effects["remotecontrol"]["was_ready"] then
+		cmd.forwardmove = 0
+		cmd.turning = 0
+		cmd.throwdir = 0
+		cmd.aiming = 0
+		cmd.buttons = 0
+		cmd.flags = 0
+	end
+end
+
+addHook("PlayerCmd", on_player_cmd)
+
 -- HUD Drawer ==================================================================
 
 local function drawRunningEffects(drawer, player, cam)
@@ -332,6 +349,9 @@ local function drawRunningEffects(drawer, player, cam)
 			end
 			if (code == "swapbuttons") then
 				gfx = "SWBTICON"
+			end
+			if (code == "remotecontrol") then
+				gfx = "RMCTICON"
 			end
 			if drawer.patchExists(gfx) then
 				if not((i < 3 * TICRATE) and (i % 2 == 0)) then
@@ -786,8 +806,9 @@ end, function()
 end)
 
 effects["invertcontrols"] = CCEffect.New("invertcontrols", function(t)
-	consoleplayer.cmd.turning = -consoleplayer.cmd.turning
-	consoleplayer.cmd.aiming = -consoleplayer.cmd.aiming
+	// dummy function as the hook runs too late
+	--consoleplayer.cmd.turning = -consoleplayer.cmd.turning
+	--consoleplayer.cmd.aiming = -consoleplayer.cmd.aiming
 end, default_ready, 15 * TICRATE)
 
 effects["swapbuttons"] = CCEffect.New("swapbuttons", function(t)
@@ -818,6 +839,10 @@ local function check_skin(skin)
 	end
 	return default_ready()
 end
+
+effects["remotecontrol"] = CCEffect.New("remotecontrol", function(t)
+	// dummy function as the hook runs too late
+end, default_ready, 15 * TICRATE)
 
 effects["changerandom"] = CCEffect.New("changerandom", function(t)
 	local skin = skins[P_RandomKey(#skins)]
