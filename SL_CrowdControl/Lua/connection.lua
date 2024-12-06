@@ -173,6 +173,11 @@ local function handle_message(msg)
 		log_msg("Received empty message!")
 	end
 end
+local start_wp = nil
+local start_marker = nil
+local end_wp = nil
+local end_marker = nil
+local spawned = false
 
 local function main_loop()
 	clock = $ + 1
@@ -271,6 +276,16 @@ local function main_loop()
 	if io.type(output_file) == "file" then
 		output_file:close()
 	end
+	if start_wp != nil and not spawned then
+		if start_marker != nil then
+			P_RemoveMobj(start_marker)
+		end
+		if end_marker != nil then
+			P_RemoveMobj(end_marker)
+		end
+		--start_marker = P_SpawnMobjFromMobj(start_wp.mobj, 0, 0, 0 , MT_BANANA)
+		--end_marker = P_SpawnMobjFromMobj(end_wp.mobj, 0, 0, 0 , MT_EGGCAPSULE)
+	end
 end
 
 addHook("PreThinkFrame", main_loop)
@@ -299,18 +314,59 @@ end
 
 addHook("PlayerThink", on_player_think)
 
+local BT_LOOKBACK = 1<<5
+local direction_lock = 0
+local last_delta = 0
+
 local function on_player_cmd(player, cmd)
 	if running_effects["invertcontrols"] != nil and running_effects["invertcontrols"]["was_ready"] then
 		cmd.aiming = -cmd.aiming
 		cmd.turning = -cmd.turning
 	end
 	if running_effects["remotecontrol"] != nil and running_effects["remotecontrol"]["was_ready"] then
-		cmd.forwardmove = 0
+		cmd.forwardmove = 50
 		cmd.turning = 0
 		cmd.throwdir = 0
 		cmd.aiming = 0
-		cmd.buttons = 0
-		cmd.flags = 0
+		cmd.buttons = cmd.buttons & (BT_ATTACK|BT_LOOKBACK)
+		local waypoint = K_GetBestWaypointForMobj(consoleplayer.mo)
+		if waypoint == nil then
+			waypoint = K_GetClosestWaypointToMobj(consoleplayer.mo)
+			--print("Failed to get best, try closest")
+		end
+		if waypoint == K_GetFinishLineWaypoint() then
+			waypoint = waypoint.nextwaypoints[1]
+		end
+		if waypoint != nil
+			start_wp = waypoint.nextwaypoints[1]
+			local success, path = K_PathfindToWaypoint(waypoint.nextwaypoints[1], K_GetFinishLineWaypoint(), consoleplayer.tripwirepass != 0, false)
+			local next_waypoint = nil
+			if success then
+				--print(#path.array)
+				if #path.array > 1 then
+					next_waypoint = path.array[2].nodedata
+					--print("following path")
+				elseif #waypoint.nextwaypoints > 0
+					next_waypoint = waypoint.nextwaypoints[1]
+					--print("no path")
+				else
+					next_waypoint = K_GetFinishLineWaypoint()
+					--print("no next, assuming finish")
+				end
+				next_waypoint = next_waypoint.nextwaypoints[1]
+				local dest_angle = R_PointToAngle2(consoleplayer.mo.x, consoleplayer.mo.y, next_waypoint.mobj.x, next_waypoint.mobj.y)
+				local delta = dest_angle - consoleplayer.mo.angle
+				local delta_rate = FixedDiv((180 * FRACUNIT) - AngleFixed(delta), 180 * FRACUNIT)
+				if abs(delta) < 3*ANG1 then
+					delta_rate = 0
+				end
+				cmd.turning = max(-800, min(800, (delta_rate * 800) / FRACUNIT))
+				if delta > 5*ANG1 then
+					cmd.buttons = $ | BT_DRIFT
+				end
+				end_wp = next_waypoint
+			end
+		end
 	end
 end
 
