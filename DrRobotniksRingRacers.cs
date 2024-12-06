@@ -49,6 +49,8 @@ class DrRobotniksRingRacers : FileEffectPack
                     { Price = 25, Category = "Items", Description = "Give the player three bananas." },
                 new Effect("Eggman Capsule", "eggman")
                     { Price = 20, Category = "Items", Description = "Give the player an eggman capsule." },
+                new Effect("Eggmark", "eggmark")
+                    { Price = 50, Category = "Trigger", Description = "Give the player an eggmark." },
                 new Effect("Orbinaut", "orbinaut")
                 {
                     Price = 10, Category = "Items", Description = "Give the player an orbinaut with a single spikeball."
@@ -122,6 +124,10 @@ class DrRobotniksRingRacers : FileEffectPack
                 new Effect("Ring Lock", "ringlock")
                 {
                     Duration = 15, Price = 50, Description = "Prevent the player from collecting rings for a short while."
+                },
+                new Effect("Remote Control", "remotecontrol")
+                {
+                    Duration = 15, Price = 100, Description = "Make the player controlled by the AI for a bit.", Disabled = true
                 },
                 /*new Effect("Increase Player Lap", "playerlapplus")
                     { Price = 50, Description = "Add 1 to the player's lap counter." },
