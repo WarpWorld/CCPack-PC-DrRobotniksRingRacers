@@ -522,7 +522,7 @@ effects["invincibility"] = CCEffect.New("invincibility", function(t)
 	consoleplayer.itemamount = 1
 	consoleplayer.itemflags = $ & ~(IF_ITEMOUT|IF_EGGMANOUT)
 end, function()
-	return default_ready()
+	return itemcheck()
 end)
 
 effects["banana"] = CCEffect.New("banana", function(t)
@@ -556,7 +556,7 @@ effects["eggman"] = CCEffect.New("eggman", function(t)
 	consoleplayer.itemamount = 1
 	consoleplayer.itemflags = $ & ~(IF_ITEMOUT|IF_EGGMANOUT)
 end, function()
-	return default_ready()
+	return itemcheck()
 end)
 
 effects["orbinaut"] = CCEffect.New("orbinaut", function(t)
@@ -565,7 +565,7 @@ effects["orbinaut"] = CCEffect.New("orbinaut", function(t)
 	consoleplayer.itemamount = 1
 	consoleplayer.itemflags = $ & ~(IF_ITEMOUT|IF_EGGMANOUT)
 end, function()
-	return default_ready()
+	return itemcheck()
 end)
 
 effects["tripleorbinaut"] = CCEffect.New("tripleorbinaut", function(t)
@@ -574,7 +574,7 @@ effects["tripleorbinaut"] = CCEffect.New("tripleorbinaut", function(t)
 	consoleplayer.itemamount = 3
 	consoleplayer.itemflags = $ & ~(IF_ITEMOUT|IF_EGGMANOUT)
 end, function()
-	return default_ready()
+	return itemcheck()
 end)
 
 effects["quadorbinaut"] = CCEffect.New("quadorbinaut", function(t)
@@ -583,7 +583,7 @@ effects["quadorbinaut"] = CCEffect.New("quadorbinaut", function(t)
 	consoleplayer.itemamount = 4
 	consoleplayer.itemflags = $ & ~(IF_ITEMOUT|IF_EGGMANOUT)
 end, function()
-	return default_ready()
+	return itemcheck()
 end)
 
 effects["jawz"] = CCEffect.New("jawz", function(t)
@@ -715,7 +715,7 @@ effects["lightningshield"] = CCEffect.New("lightningshield", function(t)
 	shield.target = consoleplayer.mo
 	S_StartSound(consoleplayer.mo, sfx_s3k3e)
 end, function()
-	return default_ready() and consoleplayer.curshield != KSHIELD_TOP
+	return itemcheck() and consoleplayer.curshield != KSHIELD_TOP
 end)
 
 effects["bubbleshield"] = CCEffect.New("bubbleshield", function(t)
@@ -731,7 +731,7 @@ effects["bubbleshield"] = CCEffect.New("bubbleshield", function(t)
 	shield.target = consoleplayer.mo
 	S_StartSound(consoleplayer.mo, sfx_s3k3f)
 end, function()
-	return default_ready() and consoleplayer.curshield != KSHIELD_TOP
+	return itemcheck() and consoleplayer.curshield != KSHIELD_TOP
 end)
 
 effects["flameshield"] = CCEffect.New("flameshield", function(t)
@@ -746,7 +746,7 @@ effects["flameshield"] = CCEffect.New("flameshield", function(t)
 	shield.target = consoleplayer.mo
 	S_StartSound(consoleplayer.mo, sfx_s3k3e)
 end, function()
-	return default_ready() and consoleplayer.curshield != KSHIELD_TOP
+	return itemcheck() and consoleplayer.curshield != KSHIELD_TOP
 end)
 
 effects["hyudoro"] = CCEffect.New("hyudoro", function(t)
@@ -840,7 +840,7 @@ effects["gardentop"] = CCEffect.New("gardentop", function(t)
 	arrow.destcale = 3*arrow.scale/4
 	arrow.scale = arrow.destscale
 end, function()
-	return default_ready() and consoleplayer.curshield != KSHIELD_TOP
+	return itemcheck() and consoleplayer.curshield != KSHIELD_TOP
 end)
 
 effects["gachabom"] = CCEffect.New("gachabom", function(t)
