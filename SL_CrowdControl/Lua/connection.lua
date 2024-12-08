@@ -472,7 +472,7 @@ end
 effects["nothing"] = CCEffect.New("nothing", function(t)
 	K_StripItems(consoleplayer)
 end, function() 
-	return itemcheck() and consoleplayer.itemtype != KITEM_NONE
+	return default_ready() and consoleplayer.itemtype != KITEM_NONE
 end)
 
 effects["sneakers"] = CCEffect.New("sneakers", function(t)
