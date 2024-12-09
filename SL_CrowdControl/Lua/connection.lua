@@ -535,7 +535,7 @@ end, function()
 end)
 
 effects["triggerbanana"] = CCEffect.New("triggerbanana", function(t)
-	local banana = P_SpawnMobjFromMobj(consoleplayer.mo, 0, 0, 0, MT_BANANA)
+	local banana = P_SpawnMobjFromMobj(consoleplayer.mo, consoleplayer.mo.momx, consoleplayer.mo.momy, consoleplayer.mo.momz, MT_BANANA)
 	banana.destscale = mapobjectscale
 	banana.scale = mapobjectscale
 	banana.health = 1
@@ -878,11 +878,25 @@ end, function()
 end, 15 * TICRATE)
 
 effects["spbattack"] = CCEffect.New("spbattack", function(t)
-	local dir_x = cos(consoleplayer.mo.angle)
-	local dir_y = sin(consoleplayer.mo.angle)
-	local x = consoleplayer.mo.x + FixedMul(-(dir_x * 4096), mapobjectscale)
-	local y = consoleplayer.mo.y + FixedMul(-(dir_y * 4096), mapobjectscale)
-	local z = consoleplayer.mo.z + FixedMul(consoleplayer.mo.height/2, mapobjectscale)
+	local wp = K_GetClosestWaypointToMobj(consoleplayer.mo)
+	if wp != nil then
+		wp = wp.prevwaypoints[1] // ensure we are behind the player
+	end
+	while wp != nil and P_AproxDistance(consoleplayer.mo.x - wp.mobj.x, consoleplayer.mo.y - wp.mobj.y) < 4096 do
+		wp = wp.prevwaypoints[1]
+	end
+	local x, y, z = 0, 0, 0
+	if wp == nil then
+		local dir_x = cos(consoleplayer.mo.angle)
+		local dir_y = sin(consoleplayer.mo.angle)
+		x = consoleplayer.mo.x + FixedMul(-(dir_x * 4096), mapobjectscale)
+		y = consoleplayer.mo.y + FixedMul(-(dir_y * 4096), mapobjectscale)
+		z = consoleplayer.mo.z + FixedMul(consoleplayer.mo.height/2, mapobjectscale)
+	else
+		x = wp.mobj.x
+		y = wp.mobj.y
+		z = wp.mobj.z
+	end
 	SpawnSPB(x, y, z, consoleplayer)
 end, function()
 	return itemcheck() and not K_IsSPBInGame()
