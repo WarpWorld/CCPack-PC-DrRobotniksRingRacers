@@ -10,3 +10,4 @@ dofile("util/waypoints.lua")
 dofile("util/spb.lua")
 
 dofile("connection.lua")
+dofile("effects.lua")
