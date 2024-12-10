@@ -42,6 +42,18 @@ local cc_debug = {
 	func = nil
 })*/
 
+local function CC_GetTargetPlayer()
+	if isserver and not isdedicatedserver then
+		return server
+	elseif isdedicatedserver then
+		print("CrowdControl mod does not support dedicated servers yet!")
+	else
+		return consoleplayer
+	end
+end
+
+rawset(_G, "CC_GetTargetPlayer", CC_GetTargetPlayer)
+
 local function log_msg_silent(...)
 	if (cc_debug.value ~= 0) and (io.type(log_file) == "file") then
 		log_file:write("["..tostring(clock).."] ", ...)
