@@ -31,7 +31,7 @@ class DrRobotniksRingRacers : FileEffectPack
                     { Price = 20, Category = "Items", Description = "Remove the player's current item." },
                 new Effect("Sneakers", "sneakers")
                     { Price = 10, Category = "Items", Description = "Give the player a pair of sneakers." },
-                new Effect("Sneakers", "triggersneaker")
+                new Effect("Activate Sneakers", "triggersneaker")
                     { Price = 20, Category = "Trigger", Description = "Give the player a boost." },
                 new Effect("Dual Sneakers", "dualsneakers")
                     { Price = 20, Category = "Items", Description = "Give the player two pairs of sneakers." },
@@ -43,7 +43,7 @@ class DrRobotniksRingRacers : FileEffectPack
                     { Price = 25, Category = "Items", Description = "Give the player invincibility." },
                 new Effect("Banana", "banana")
                     { Price = 10, Category = "Items", Description = "Give the player a banana." },
-                new Effect("Banana", "triggerbanana")
+                new Effect("Activate Banana", "triggerbanana")
                     { Price = 20, Category = "Trigger", Description = "Make the player slip on a banana." },
                 new Effect("Triple Bananas", "triplebanana")
                     { Price = 25, Category = "Items", Description = "Give the player three bananas." },
@@ -80,11 +80,11 @@ class DrRobotniksRingRacers : FileEffectPack
                 },
                 new Effect("Grow", "grow")
                     { Price = 30, Category = "Items", Description = "Give the player a grow item." },
-                new Effect("Grow", "triggergrow")
+                new Effect("Grow Player", "triggergrow")
                     { Price = 50, Category = "Trigger", Description = "Grow the player." },
                 new Effect("Shrink", "shrink")
                     { Price = 50, Category = "Items", Description = "Give the player a shrink item." },
-                new Effect("Shrink", "triggershrink")
+                new Effect("Shrink Player", "triggershrink")
                     { Price = 50, Category = "Trigger", Description = "Shrink the player." },
                 new Effect("Lightning Shield", "lightningshield")
                     { Price = 50, Category = "Items", Description = "Give the player a lightning shield." },
