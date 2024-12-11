@@ -4,12 +4,10 @@ rawset(_G, "spb_timer", 0);
 local spb_curwaypoint = nil
 local spb_curwaypointID = -1
 local spb_destwaypoint = nil
-local spb_target = nil
 
 local function SpawnSPB(x, y, z, player)
 	spb_mobj = P_SpawnMobj(x, y, z, MT_SPB)
 	spb_mobj.angle = player.mo.angle
-	spb_target = player.mo
 	spb_timer = TICRATE * 60 -- 1 minute
 end
 rawset(_G, "SpawnSPB", SpawnSPB);
@@ -666,8 +664,8 @@ local function spb_spawn(mobj)
 	spb_curwaypoint = nil
 	spb_destwaypoint = nil
 	spb_curwaypointID = -1
-	spb.target = spb_target
-	spb.tracer = spb_target
+	spb.target = CC_GetTargetPlayer()
+	spb.tracer = spb.target
 	return false
 end
 
