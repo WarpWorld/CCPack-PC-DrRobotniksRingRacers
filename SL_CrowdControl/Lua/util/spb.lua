@@ -319,9 +319,10 @@ local function spb_seek(spb)
 	local circling = false
 	
 	spb.lastlook = -1
-	if (not spb.tracer.valid or spb.tracer.health <= 0 or spb.tracer.player == nil) then
+	if (spb.tracer == nil or not spb.tracer.valid or spb.tracer.health <= 0 or spb.tracer.player == nil) then
 		// player invalid, let's end this
 		P_KillMobj(spb)
+		return
 	end
 	dist = SPB_Distance(spb, spb.tracer)
 	active_dist = FixedMul(1024 * FRACUNIT, spb.tracer.scale)
@@ -460,7 +461,7 @@ local function spb_chase(spb)
 	spb_curwaypoint = nil
 	spb_curwaypointID = -1
 	
-	if (not spb.tracer.valid or spb.tracer.health <= 0 or spb.tracer.player == nil) then
+	if (spb.tracer == nil or not spb.tracer.valid or spb.tracer.health <= 0 or spb.tracer.player == nil) then
 		// player invalid, let's end this
 		P_KillMobj(spb)
 	end
@@ -658,14 +659,14 @@ local function spb_death(target, inflictor, source, damagetype)
 end
 
 local function spb_spawn(mobj)
-	if (not mobj.valid) or (mobj != spb_mobj) then
+	if (not mobj.valid) then
 		return false
 	end
 	spb_curwaypoint = nil
 	spb_destwaypoint = nil
 	spb_curwaypointID = -1
-	spb.target = CC_GetTargetPlayer()
-	spb.tracer = spb.target
+	mobj.target = CC_GetTargetPlayer().mo
+	mobj.tracer = CC_GetTargetPlayer().mo
 	return false
 end
 

@@ -31,24 +31,21 @@ local input_dirty = false -- if this flag is set, input parsing is deferred a ti
 local clock = 0
 
 // CV vars are bugged atm
-local cc_debug = {
-	value = 1
-}
-/*CV_RegisterVar({
+local cc_debug = CV_RegisterVar({
 	name = "cc_debug",
-	defaultvalue = 0,
-	flags = CV_NOTINNET|CV_ALLOWLUA,
+	defaultvalue = 1,
+	flags = CV_NOTINNET,
 	PossibleValue = CV_OnOff,
 	func = nil
-})*/
+})
 
 local function CC_GetTargetPlayer()
-	if isserver and not isdedicatedserver then
-		return server
-	elseif isdedicatedserver then
+	if isdedicatedserver then
 		print("CrowdControl mod does not support dedicated servers yet!")
-	else
+	elseif isserver
 		return consoleplayer
+	else
+		return server
 	end
 end
 
@@ -278,6 +275,8 @@ local function main_loop()
 end
 
 addHook("PreThinkFrame", main_loop)
+addHook("IntermissionThinker", main_loop)
+addHook("VoteThinker", main_loop)
 
 -- quitting: true if the application is exiting, false if returning to titlescreen
 local function on_game_quit(quitting)
