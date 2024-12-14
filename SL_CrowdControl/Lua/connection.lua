@@ -311,7 +311,7 @@ local function drawRunningEffects(drawer, player, cam)
 	for _,i in ipairs(times)
 		for j,code in ipairs(timers[i]["effects"])
 			local gfx = cc_effects[code].icon
-			if drawer.patchExists(gfx) then
+			if gfx != "" and drawer.patchExists(gfx) then
 				if not((i < 3 * TICRATE) and (i % 2 == 0)) then
 					local patch = drawer.cachePatch(gfx)
 					drawer.drawScaled((320 - offset) * FRACUNIT, (200 - 44) * FRACUNIT, FRACUNIT/2, patch)
