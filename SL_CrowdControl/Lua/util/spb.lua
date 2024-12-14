@@ -1,9 +1,7 @@
 local spb_mobj = nil
 rawset(_G, "spb_timer", 0);
 
-local spb_curwaypoint = nil
 local spb_curwaypointID = -1
-local spb_destwaypoint = nil
 
 local function SpawnSPB(x, y, z, player)
 	spb_mobj = P_SpawnMobj(x, y, z, MT_SPB)
@@ -350,13 +348,14 @@ local function spb_seek(spb)
 			S_StartSound(spb, sfx_spbska)
 		end
 	end
+	local spb_curwaypoint = nil
 	if spb_curwaypointID == -1 then
 		spb_curwaypoint = K_GetBestWaypointForMobj(spb)
 		spb_curwaypointID = K_GetWaypointHeapIndex(spb_curwaypoint)
 	else
 		spb_curwaypoint = K_GetWaypointFromIndex(spb_curwaypointID)
 	end
-	spb_destwaypoint = K_GetBestWaypointForMobj(spb.tracer)
+	local spb_destwaypoint = K_GetBestWaypointForMobj(spb.tracer)
 	
 	if spb_curwaypoint != nil then
 		local wp_dist = INT32_MAX
@@ -458,7 +457,6 @@ local function spb_chase(spb)
 	local chase = spb.tracer
 	local chasePlayer = nil
 
-	spb_curwaypoint = nil
 	spb_curwaypointID = -1
 	
 	if (spb.tracer == nil or not spb.tracer.valid or spb.tracer.health <= 0 or spb.tracer.player == nil) then
@@ -586,7 +584,7 @@ local function spb_thinker(mobj)
 	
 	if mobj.threshold > 0 then
 		mobj.lastlook = -1
-		mobj.curwaypoint = nil
+		mobj.cusval = -1
 		mobj.watertop = 0
 		mobj.reactiontime = 0
 		mobj.movecount = 150
@@ -662,8 +660,6 @@ local function spb_spawn(mobj)
 	if (not mobj.valid) then
 		return false
 	end
-	spb_curwaypoint = nil
-	spb_destwaypoint = nil
 	spb_curwaypointID = -1
 	mobj.target = CC_GetTargetPlayer().mo
 	mobj.tracer = CC_GetTargetPlayer().mo
@@ -673,3 +669,15 @@ end
 addHook("MobjThinker", spb_thinker, MT_SPB)
 addHook("MobjDeath", spb_death, MT_SPB)
 addHook("MobjSpawn", spb_spawn, MT_SPB)
+
+
+addHook("NetVars", function(network)
+	spb_mobj = network($)
+	spb_timer = network($)
+
+	spb_curwaypointID = network($)
+	if spb_mobj != nil and spb_mobj.valid then
+		spb_mobj.target = CC_GetTargetPlayer().mo
+		spb_mobj.tracer = CC_GetTargetPlayer().mo
+	end
+end)

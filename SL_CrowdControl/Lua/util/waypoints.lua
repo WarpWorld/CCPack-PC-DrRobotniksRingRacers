@@ -483,3 +483,7 @@ local function on_waypoint_spawned(mobj, mthing)
 end
 
 addHook("MapThingSpawn", on_waypoint_spawned, MT_WAYPOINT)
+
+addHook("NetVars", function(network)
+	K_SetupWaypointList()
+end)
