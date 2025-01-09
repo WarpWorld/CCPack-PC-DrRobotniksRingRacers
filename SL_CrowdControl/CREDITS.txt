@@ -3,3 +3,5 @@ Uses the CustomHud v2.1 by TehRealSalt (file renamed to customhud_v2.1 here)
 Version checker for the libraries originally from TehRealSalt's vectorlib in their Gamma character mod.
 
 SPB and waypoint code taken from the Ring Racers source code to replicate vanilla behaviours.
+
+SonicPog from Leminn made by Saneko.

@@ -41,8 +41,6 @@ rawset(_G, "K_IsSPBInGame", K_IsSPBInGame);
 
 local function on_map_changed(mapnum)
 	spb_mobj = nil
-	spb_curwaypoint = nil
-	spb_destwaypoint = nil
 end
 
 addHook("MapChange", on_map_changed)
