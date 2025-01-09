@@ -453,6 +453,26 @@ cc_effects["playerlapminus"] = CCEffect.New("playerlapminus", function(t)
 	CC_GetTargetPlayer().laps = $ - 1
 end, default_ready)
 
+-- ===== Emotes ================================================================
+
+cc_effects["emoteheart"] = CCEffect("emoteheart", function(t)
+	table.insert(cc_emotes, CCEmote("EMOTLOVE"))
+end, function()
+	return true
+end)
+
+cc_effects["emotepog"] = CCEffect("emotepog", function(t)
+	table.insert(cc_emotes, CCEmote("EMOTPOGS"))
+end, function()
+	return true
+end)
+
+cc_effects["emotenoway"] = CCEffect("emotenoway", function(t)
+	table.insert(cc_emotes, CCEmote("EMOTNOWY"))
+end, function()
+	return true
+end)
+
 -- ===== LUA HOOKS =============================================================
 
 local function on_map_changed(mapnum)

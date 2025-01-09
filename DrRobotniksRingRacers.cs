@@ -129,6 +129,15 @@ class DrRobotniksRingRacers : FileEffectPack
                 {
                     Duration = 15, Price = 100, Description = "Make the player controlled by the AI for a bit.", Disabled = true
                 },
+                new Effect("Emote Heart", "emoteheart")
+                {
+                    Price = 1, Category = "Emotes",
+                    Description = "Send the player some lovely encouragement."
+                },
+                new Effect("Emote Pog", "emotepog")
+                    { Price = 1, Category = "Emotes" },
+                new Effect("Emote No Way", "emotenoway")
+                    { Price = 1, Category = "Emotes" },
                 /*new Effect("Increase Player Lap", "playerlapplus")
                     { Price = 50, Description = "Add 1 to the player's lap counter." },
                 new Effect("Decrease Player Lap", "playerlapminus")
