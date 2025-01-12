@@ -43,9 +43,9 @@ local function CC_GetTargetPlayer()
 	if isdedicatedserver then
 		print("CrowdControl mod does not support dedicated servers yet!")
 	elseif isserver
-		return consoleplayer
-	else
 		return server
+	else
+		return consoleplayer
 	end
 end
 
@@ -217,31 +217,33 @@ local function main_loop()
 				cc_running_effects[k] = nil
 			end
 		end
-		if input_dirty then
-			input_file = open_local(input_path,"w")
-			if not (input_file == nil)
-				input_file:close() -- clear the file
-				input_dirty = false
-			end
-		else
-			input_file = open_local(input_path, "r")
-			if not (input_file == nil) then
-				local content = input_file:read("*a")
-				if not (content == "") then
-					for i,msg in ipairs(split(content, "%c")) do -- This is a bad assumption, but all control codes should be escaped
-						log_msg_silent(msg)
-						handle_message(parseJSON(msg))
-					end
-					input_file:close()
-					input_file = open_local(input_path,"w")
-					-- in rare cases handling the messages took too long and CC grabbed the file already
-					if not (input_file == nil) then
-						input_file:close() -- clear the file
+		if consoleplayer == CC_GetTargetPlayer() then
+			if input_dirty then
+				input_file = open_local(input_path,"w")
+				if not (input_file == nil)
+					input_file:close() -- clear the file
+					input_dirty = false
+				end
+			else
+				input_file = open_local(input_path, "r")
+				if not (input_file == nil) then
+					local content = input_file:read("*a")
+					if not (content == "") then
+						for i,msg in ipairs(split(content, "%c")) do -- This is a bad assumption, but all control codes should be escaped
+							log_msg_silent(msg)
+							handle_message(parseJSON(msg))
+						end
+						input_file:close()
+						input_file = open_local(input_path,"w")
+						-- in rare cases handling the messages took too long and CC grabbed the file already
+						if not (input_file == nil) then
+							input_file:close() -- clear the file
+						else
+							input_dirty = true
+						end
 					else
-						input_dirty = true
+						input_file:close()
 					end
-				else
-					input_file:close()
 				end
 			end
 		end

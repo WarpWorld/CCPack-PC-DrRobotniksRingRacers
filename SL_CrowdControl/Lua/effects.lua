@@ -42,6 +42,7 @@ end, default_ready)
 
 cc_effects["changerandom"] = CCEffect.New("changerandom", function(t)
 	local player = CC_GetTargetPlayer()
+	local oldskin = skins[player.skin]
 	local skin = skins[P_RandomKey(#skins)]
 	while not (skin.valid) or (oldskin == skin) or not R_SkinUsable(player, skin.name) do
 		skin = skins[P_RandomKey(#skins)]
@@ -383,7 +384,7 @@ cc_effects["triggershrink"] = CCEffect.New("triggershrink", function(t)
 		player.mo.destscale = FixedMul(player.mo.destscale, FRACUNIT/2)
 	end
 end, function() 
-	return default_ready() and player.growshrinktimer == 0
+	return default_ready() and CC_GetTargetPlayer().growshrinktimer == 0
 end)
 
 cc_effects["eggmark"] = CCEffect.New("eggmark", function(t)
