@@ -461,9 +461,12 @@ local function on_map_loaded(mapnum)
 	end
 	waypoints = {}
 	for i=1,#temp do
+		if temp[i] == nil then
+			continue
+		end
 		local added = false
 		for j,wp in ipairs(waypoints) do
-			if wp == temp[i].tracer
+			if temp[i] and wp == temp[i].tracer
 				table.insert(waypoints, j, temp[i])
 				added = true
 				break

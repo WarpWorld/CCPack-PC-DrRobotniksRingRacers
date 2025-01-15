@@ -255,7 +255,10 @@ end)
 
 cc_effects["kitchensink"] = CCEffect.New("kitchensink", function(t)
 	GiveItem(CC_GetTargetPlayer(), KITEM_KITCHENSINK, 1)
-end, function() 
+end,  function()
+	if mapheaderinfo[gamemap].typeoflevel == TOL_SPECIAL then
+		return false, "Kitchen sink bugs the game in special stages"
+	end
 	return itemcheck()
 end)
 
@@ -422,10 +425,10 @@ cc_effects["spbattack"] = CCEffect.New("spbattack", function(t)
 	end
 	SpawnSPB(x, y, z, player)
 end, function()
-	return (itemcheck() 
-			and not K_IsSPBInGame() 
-			and mapheaderinfo[gamemap].typeoflevel != TOL_SPECIAL 
-			and mapheaderinfo[gamemap].typeoflevel != TOL_BATTLE)
+	if mapheaderinfo[gamemap].typeoflevel == TOL_BATTLE then
+		return false, "spb attack is not available in Prison Attack"
+	end
+	return itemcheck() and not K_IsSPBInGame()
 end)
 
 cc_effects["invertcontrols"] = CCEffect.New("invertcontrols", function(t)
