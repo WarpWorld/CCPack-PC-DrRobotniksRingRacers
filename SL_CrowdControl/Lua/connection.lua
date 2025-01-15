@@ -274,6 +274,10 @@ local function main_loop()
 			output_file:close()
 		end
 	end
+	local player = CC_GetTargetPlayer()
+	if player != nil then
+		player.lives = 2
+	end
 end
 
 addHook("PreThinkFrame", main_loop)

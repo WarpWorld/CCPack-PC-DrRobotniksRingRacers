@@ -167,7 +167,7 @@ end)
 cc_effects["spb"] = CCEffect.New("spb", function(t)
 	GiveItem(CC_GetTargetPlayer(), KITEM_SPB, 1)
 end, function()
-	return itemcheck() and not K_IsSPBInGame()
+	return itemcheck() and not K_IsSPBInGame() and mapheaderinfo[gamemap].typeoflevel != TOL_BATTLE
 end)
 
 cc_effects["grow"] = CCEffect.New("grow", function(t)
@@ -338,7 +338,9 @@ cc_effects["triggerbanana"] = CCEffect.New("triggerbanana", function(t)
 	banana.destscale = mapobjectscale
 	banana.scale = mapobjectscale
 	banana.health = 1
-end, default_ready)
+end, function()
+	return default_ready and mapheaderinfo[gamemap].typeoflevel != TOL_BATTLE
+end)
 
 cc_effects["triggergrow"] = CCEffect.New("triggergrow", function(t)
 	local player = CC_GetTargetPlayer()
@@ -393,7 +395,9 @@ cc_effects["eggmark"] = CCEffect.New("eggmark", function(t)
 	K_DropItems(player)
 	player.eggmanexplode = 6*TICRATE
 	S_StartSound(player.mo, sfx_itrole)
-end, default_ready)
+end, function()
+	return default_ready and mapheaderinfo[gamemap].typeoflevel != TOL_BATTLE
+end)
 
 cc_effects["spbattack"] = CCEffect.New("spbattack", function(t)
 	local player = CC_GetTargetPlayer()
@@ -418,7 +422,10 @@ cc_effects["spbattack"] = CCEffect.New("spbattack", function(t)
 	end
 	SpawnSPB(x, y, z, player)
 end, function()
-	return itemcheck() and not K_IsSPBInGame()
+	return (itemcheck() 
+			and not K_IsSPBInGame() 
+			and mapheaderinfo[gamemap].typeoflevel != TOL_SPECIAL 
+			and mapheaderinfo[gamemap].typeoflevel != TOL_BATTLE)
 end)
 
 cc_effects["invertcontrols"] = CCEffect.New("invertcontrols", function(t)
