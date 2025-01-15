@@ -539,7 +539,10 @@ local function spb_chase(spb)
 
 		
 		local wp_dist = INT32_MAX
-		local waypoint = K_GetBestWaypointForMobj(spb.tracer).mobj
+		local waypoint = K_GetBestWaypointForMobj(spb.tracer)
+		if waypoint != nil then
+			waypoint = waypoint.mobj
+		end
 		// thing_args[3]: SPB speed (0-100)
 		if (waypoint and waypoint.spawnpoint.args[3]) then // 0 = default speed (unchanged)
 			desired_speed = desired_speed * waypoint.spawnpoint.args[3] / 100;
