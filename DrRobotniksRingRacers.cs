@@ -139,6 +139,18 @@ class DrRobotniksRingRacers : FileEffectPack
                     { Price = 50, Description = "Add 1 to the player's lap counter." },
                 new Effect("Decrease Player Lap", "playerlapminus")
                     { Price = 50, Description = "Remove 1 from the player's lap counter." },*/
+                new Effect("S Monitor", "smonitor")
+                    { Price = 50, Category = "Powerups" },
+                /*new Effect("Barrier", "barrier")
+                    { Price = 20, Category = "Powerups" },*/
+                /*new Effect("Bumper (Powerup)", "bumperpower")
+                    { Price = 20, Category = "Powerups" },*/
+                new Effect("Badge", "badge")
+                    { Price = 50, Category = "Powerups" },
+                new Effect("Superflicky", "flicky")
+                    { Price = 50, Category = "Powerups" },
+                /*new Effect("Points", "points")
+                    { Price = 20, Category = "Powerups" },*/
             };
             return effects;
         }
