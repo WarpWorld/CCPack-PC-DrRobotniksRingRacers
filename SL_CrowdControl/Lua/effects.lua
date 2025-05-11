@@ -360,10 +360,13 @@ end, default_ready)
 cc_effects["triggerbanana"] = CCEffect.New("triggerbanana", function(t)
 	local player = CC_GetTargetPlayer()
 	local banana = P_SpawnMobjFromMobj(player.mo, player.mo.momx, player.mo.momy, player.mo.momz + 24*FRACUNIT, MT_BANANA)
+	banana.momx = player.mo.momx
+	banana.momy = player.mo.momy
+	P_SetObjectMomZ(banana, 24*FRACUNIT, true)
 	banana.destscale = mapobjectscale
 	banana.scale = mapobjectscale
 	banana.health = 0
-	K_SpinPlayer(player, banana, player, KSPIN_SPINOUT)
+	K_SpinPlayer(player, banana, KSPIN_SPINOUT, nil)
 end, function()
 	return default_ready and mapheaderinfo[gamemap].typeoflevel != TOL_BATTLE
 end)
