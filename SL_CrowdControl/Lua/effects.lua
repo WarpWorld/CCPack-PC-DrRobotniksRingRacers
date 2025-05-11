@@ -16,11 +16,33 @@ end
 local IF_ITEMOUT = 1<<1
 local IF_EGGMANOUT = 1<<2
 
+local BATTLE_POWERUP_TIME = (30*TICRATE)
+
+
 local function itemcheck() 
 	local player = CC_GetTargetPlayer()
 	return (default_ready() 
 			and player.itemflags & (IF_ITEMOUT|IF_EGGMANOUT) == 0 
 			and player.curshield == KSHIELD_NONE
+			and leveltime > starttime) --and not consoleplayer.itemroulette.eggman
+end
+
+local function K_AnyPowerUpRemaining(player)
+	local mask = 0
+	for i = FIRSTPOWERUP,LASTPOWERUP do
+		if K_PowerUpRemaining(player, i) then
+			mask = $ - (1 << (i - FIRSTPOWERUP))
+		end
+	end
+	return mask;
+end
+
+rawset(_G, "K_AnyPowerUpRemaining", K_AnyPowerUpRemaining)
+
+local function powerupcheck() 
+	local player = CC_GetTargetPlayer()
+	return (default_ready() 
+			and K_AnyPowerUpRemaining(player) == 0
 			and leveltime > starttime) --and not consoleplayer.itemroulette.eggman
 end
 
@@ -337,10 +359,11 @@ end, default_ready)
 
 cc_effects["triggerbanana"] = CCEffect.New("triggerbanana", function(t)
 	local player = CC_GetTargetPlayer()
-	local banana = P_SpawnMobjFromMobj(player.mo, player.mo.momx, player.mo.momy, player.mo.momz, MT_BANANA)
+	local banana = P_SpawnMobjFromMobj(player.mo, player.mo.momx, player.mo.momy, player.mo.momz + 24*FRACUNIT, MT_BANANA)
 	banana.destscale = mapobjectscale
 	banana.scale = mapobjectscale
-	banana.health = 1
+	banana.health = 0
+	K_SpinPlayer(player, banana, player, KSPIN_SPINOUT)
 end, function()
 	return default_ready and mapheaderinfo[gamemap].typeoflevel != TOL_BATTLE
 end)
@@ -483,6 +506,32 @@ cc_effects["emotenoway"] = CCEffect("emotenoway", function(t)
 end, function()
 	return true
 end)
+
+-- ===== Powerups ==============================================================
+
+cc_effects["smonitor"] = CCEffect("smonitor", function(t)
+	K_GivePowerUp(CC_GetTargetPlayer(), POWERUP_SMONITOR, BATTLE_POWERUP_TIME)
+end, powerupcheck)
+
+cc_effects["barrier"] = CCEffect("barrier", function(t)
+	K_GivePowerUp(CC_GetTargetPlayer(), POWERUP_BARRIER, BATTLE_POWERUP_TIME)
+end, powerupcheck)
+
+cc_effects["bumperpower"] = CCEffect("bumperpower", function(t)
+	K_GivePowerUp(CC_GetTargetPlayer(), POWERUP_BUMPER, BATTLE_POWERUP_TIME)
+end, powerupcheck)
+
+cc_effects["badge"] = CCEffect("badge", function(t)
+	K_GivePowerUp(CC_GetTargetPlayer(), POWERUP_BADGE, BATTLE_POWERUP_TIME)
+end, powerupcheck)
+
+cc_effects["flicky"] = CCEffect("flicky", function(t)
+	K_GivePowerUp(CC_GetTargetPlayer(), POWERUP_SUPERFLICKY, BATTLE_POWERUP_TIME)
+end, powerupcheck)
+
+cc_effects["points"] = CCEffect("points", function(t)
+	K_GivePowerUp(CC_GetTargetPlayer(), POWERUP_POINTS, BATTLE_POWERUP_TIME)
+end, powerupcheck)
 
 -- ===== LUA HOOKS =============================================================
 
