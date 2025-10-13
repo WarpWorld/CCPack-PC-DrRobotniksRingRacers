@@ -18,136 +18,136 @@ class DrRobotniksRingRacers : FileEffectPack
         {
             List<Effect> effects = new List<Effect>
             {
-                new Effect("Change to Random Character", "changerandom")
+                new("Change to Random Character", "changerandom")
                     { Price = 20, Description = "Sets the player character to a random character." },
-                new Effect("Take Rings", "takerings")
+                new("Take Rings", "takerings")
                     { Price = 5, Quantity = 20, Description = "Take the player's rings away." },
-                new Effect("Give Rings", "giverings")
+                new("Give Rings", "giverings")
                     { Price = 1, Quantity = 99, Description = "Give the player some rings." },
-                new Effect("Nothing", "nothing")
+                new("Nothing", "nothing")
                     { Price = 20, Category = "Items", Description = "Remove the player's current item." },
-                new Effect("Sneakers", "sneakers")
+                new("Sneakers", "sneakers")
                     { Price = 10, Category = "Items", Description = "Give the player a pair of sneakers." },
-                new Effect("Activate Sneakers", "triggersneaker")
+                new("Activate Sneakers", "triggersneaker")
                     { Price = 20, Category = "Trigger", Description = "Give the player a boost." },
-                new Effect("Dual Sneakers", "dualsneakers")
+                new("Dual Sneakers", "dualsneakers")
                     { Price = 20, Category = "Items", Description = "Give the player two pairs of sneakers." },
-                new Effect("Triple Sneakers", "triplesneakers")
+                new("Triple Sneakers", "triplesneakers")
                     { Price = 25, Category = "Items", Description = "Give the player three pairs of sneakers." },
-                new Effect("Rocketsneakers", "rocketsneakers")
+                new("Rocketsneakers", "rocketsneakers")
                     { Price = 50, Category = "Items", Description = "Give the player a pair of rocket sneakers." },
-                new Effect("Invincibility", "invincibility")
+                new("Invincibility", "invincibility")
                     { Price = 25, Category = "Items", Description = "Give the player invincibility." },
-                new Effect("Banana", "banana")
+                new("Banana", "banana")
                     { Price = 10, Category = "Items", Description = "Give the player a banana." },
-                new Effect("Activate Banana", "triggerbanana")
+                new("Activate Banana", "triggerbanana")
                     { Price = 20, Category = "Trigger", Description = "Make the player slip on a banana." },
-                new Effect("Triple Bananas", "triplebanana")
+                new("Triple Bananas", "triplebanana")
                     { Price = 25, Category = "Items", Description = "Give the player three bananas." },
-                new Effect("Eggman Capsule", "eggman")
+                new("Eggman Capsule", "eggman")
                     { Price = 20, Category = "Items", Description = "Give the player an eggman capsule." },
-                new Effect("Eggmark", "eggmark")
+                new("Eggmark", "eggmark")
                     { Price = 50, Category = "Trigger", Description = "Give the player an eggmark." },
-                new Effect("Orbinaut", "orbinaut")
+                new("Orbinaut", "orbinaut")
                 {
                     Price = 10, Category = "Items", Description = "Give the player an orbinaut with a single spikeball."
                 },
-                new Effect("Triple Orbinaut", "tripleorbinaut")
+                new("Triple Orbinaut", "tripleorbinaut")
                 {
                     Price = 25, Category = "Items", Description = "Give the player an orbinaut with three spikeballs."
                 },
-                new Effect("Quad Orbinaut", "quadorbinaut")
+                new("Quad Orbinaut", "quadorbinaut")
                 {
                     Price = 35, Category = "Items", Description = "Give the player an orbinaut with four spikeballs."
                 },
-                new Effect("Jawz", "jawz")
+                new("Jawz", "jawz")
                     { Price = 10, Category = "Items", Description = "Give the player a jawz." },
-                new Effect("Dual Jawz", "dualjawz")
+                new("Dual Jawz", "dualjawz")
                     { Price = 20, Category = "Items", Description = "Give the player two jawz." },
-                new Effect("Mine", "mine")
+                new("Mine", "mine")
                     { Price = 10, Category = "Items", Description = "Give the player a mine." },
-                new Effect("Landmine", "landmine")
+                new("Landmine", "landmine")
                     { Price = 20, Category = "Items", Description = "Give the player a land mine." },
-                new Effect("Ballhog", "ballhog")
+                new("Ballhog", "ballhog")
                     { Price = 20, Category = "Items", Description = "Give the player a ballhog." },
-                new Effect("S. P. B.", "spb")
+                new("S. P. B.", "spb")
                 {
                     Price = 50, Category = "Items",
                     Description = "Give the player a Self Propelled Bomb to catch back up."
                 },
-                new Effect("Grow", "grow")
+                new("Grow", "grow")
                     { Price = 30, Category = "Items", Description = "Give the player a grow item." },
-                new Effect("Grow Player", "triggergrow")
+                new("Grow Player", "triggergrow")
                     { Price = 50, Category = "Trigger", Description = "Grow the player." },
-                new Effect("Shrink", "shrink")
+                new("Shrink", "shrink")
                     { Price = 50, Category = "Items", Description = "Give the player a shrink item." },
-                new Effect("Shrink Player", "triggershrink")
+                new("Shrink Player", "triggershrink")
                     { Price = 50, Category = "Trigger", Description = "Shrink the player." },
-                new Effect("Lightning Shield", "lightningshield")
+                new("Lightning Shield", "lightningshield")
                     { Price = 50, Category = "Items", Description = "Give the player a lightning shield." },
-                new Effect("Bubble Shield", "bubbleshield")
+                new("Bubble Shield", "bubbleshield")
                     { Price = 50, Category = "Items", Description = "Give the player a bubble shield. BWAOH" },
-                new Effect("Flame Shield", "flameshield")
+                new("Flame Shield", "flameshield")
                     { Price = 50, Category = "Items", Description = "Give the player a flame shield." },
-                new Effect("Hyudoro (Ghost)", "hyudoro")
+                new("Hyudoro (Ghost)", "hyudoro")
                     { Price = 25, Category = "Items", Description = "Give the player a ghost to steal items." },
-                new Effect("Pogospring", "pogospring")
+                new("Pogospring", "pogospring")
                     { Price = 25, Category = "Items", Description = "Give the player a spring." },
-                new Effect("Superring", "superring")
+                new("Superring", "superring")
                     { Price = 20, Category = "Items", Description = "Give the player a stack of rings." },
-                new Effect("Kitchensink", "kitchensink")
+                new("Kitchensink", "kitchensink")
                     { Price = 50, Category = "Items", Description = "Give the player a kitchen sink." },
-                new Effect("Bumper", "bumper")
+                new("Bumper", "bumper")
                     { Price = 20, Category = "Items", Description = "Give the player a drop target." },
-                new Effect("Gardentop", "gardentop")
+                new("Gardentop", "gardentop")
                     { Price = 50, Category = "Items", Description = "Give the player a garden top spinner." },
-                new Effect("Gachabom", "gachabom")
+                new("Gachabom", "gachabom")
                     { Price = 20, Category = "Items", Description = "Give the player a gachabom." },
-                new Effect("Triple Gachabom", "triplegachabom")
+                new("Triple Gachabom", "triplegachabom")
                     { Price = 50, Category = "Items", Description = "Give the player three gachaboms." },
-                new Effect("S. P. B. Attack", "spbattack")
+                new("S. P. B. Attack", "spbattack")
                 {
                     Price = 100, Description = "Make a Self Propelled Bomb follow the player for a bit.",
                     SessionCooldown = 2
                 },
-                new Effect("Invert Controls", "invertcontrols")
+                new("Invert Controls", "invertcontrols")
                 {
                     Duration = 15, Price = 50, Category = "Controls", Description = "Inverts the player's controls."
                 },
-                new Effect("Swap Buttons", "swapbuttons")
+                new("Swap Buttons", "swapbuttons")
                 {
                     Duration = 15, Price = 50, Category = "Controls", Description = "Inverts the player's acceleration and brake buttons."
                 },
-                new Effect("Ring Lock", "ringlock")
+                new("Ring Lock", "ringlock")
                 {
                     Duration = 15, Price = 50, Description = "Prevent the player from collecting rings for a short while."
                 },
-                new Effect("Remote Control", "remotecontrol")
+                new("Remote Control", "remotecontrol")
                 {
                     Duration = 15, Price = 100, Description = "Make the player controlled by the AI for a bit.", Disabled = true
                 },
-                new Effect("Emote Heart", "emoteheart")
+                new("Emote Heart", "emoteheart")
                 {
                     Price = 1, Category = "Emotes",
                     Description = "Send the player some lovely encouragement."
                 },
-                new Effect("Emote Pog", "emotepog")
+                new("Emote Pog", "emotepog")
                     { Price = 1, Category = "Emotes" },
-                new Effect("Emote No Way", "emotenoway")
+                new("Emote No Way", "emotenoway")
                     { Price = 1, Category = "Emotes" },
                 /*new Effect("Increase Player Lap", "playerlapplus")
                     { Price = 50, Description = "Add 1 to the player's lap counter." },
                 new Effect("Decrease Player Lap", "playerlapminus")
                     { Price = 50, Description = "Remove 1 from the player's lap counter." },*/
-                new Effect("S Monitor", "smonitor")
+                new("S Monitor", "smonitor")
                     { Price = 50, Category = "Powerups" },
                 /*new Effect("Barrier", "barrier")
                     { Price = 20, Category = "Powerups" },*/
                 /*new Effect("Bumper (Powerup)", "bumperpower")
                     { Price = 20, Category = "Powerups" },*/
-                new Effect("Badge", "badge")
+                new("Badge", "badge")
                     { Price = 50, Category = "Powerups" },
-                new Effect("Superflicky", "flicky")
+                new("Superflicky", "flicky")
                     { Price = 50, Category = "Powerups" },
                 /*new Effect("Points", "points")
                     { Price = 20, Category = "Powerups" },*/
