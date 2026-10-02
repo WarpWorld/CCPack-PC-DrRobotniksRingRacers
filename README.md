@@ -1,5 +1,11 @@
 # Dr. Robotnik's Ring Racers
 
+## Pack metadata
+- **Game display name:** Dr. Robotnik's Ring Racers
+- **Crowd Control game ID:** `DrRobotniksRingRacers`
+- **Connector type:** `FileConnector`
+
+
 This pack connects Crowd Control to **Dr. Robotnik's Ring Racers** through the
 bundled `SL_CrowdControl.pk3` Lua mod. Communication is file-based.
 
